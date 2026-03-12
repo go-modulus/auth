@@ -1,15 +1,16 @@
 package auth
 
 import (
-	"braces.dev/errtrace"
 	"context"
 	"crypto/rand"
 	"encoding/base64"
+	"time"
+
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/modulus/errors"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/gofrs/uuid"
 	"gopkg.in/guregu/null.v4"
-	"time"
 )
 
 var ErrTokenIsRevoked = errors.New("token is revoked")

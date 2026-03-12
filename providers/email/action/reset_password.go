@@ -1,7 +1,6 @@
 package action
 
 import (
-	"braces.dev/errtrace"
 	"context"
 	"crypto/rand"
 	"encoding/base64"
@@ -9,6 +8,7 @@ import (
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/modulus/errors"
 	"github.com/go-modulus/modulus/errors/errsys"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/go-modulus/modulus/errors/erruser"
 	"github.com/go-modulus/modulus/validator"
 	validation "github.com/go-ozzo/ozzo-validation/v4"

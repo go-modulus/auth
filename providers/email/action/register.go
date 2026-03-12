@@ -6,10 +6,10 @@ import (
 	"github.com/go-modulus/auth/install/graphql"
 	"strings"
 
-	"braces.dev/errtrace"
 	"github.com/go-modulus/auth"
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/modulus/errors"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/go-modulus/modulus/errors/erruser"
 	"github.com/go-modulus/modulus/validator"
 	validation "github.com/go-ozzo/ozzo-validation/v4"

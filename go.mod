@@ -3,7 +3,6 @@ module github.com/go-modulus/auth
 go 1.26
 
 require (
-	braces.dev/errtrace v0.4.0
 	github.com/99designs/gqlgen v0.17.88
 	github.com/brianvoe/gofakeit/v7 v7.14.1
 	github.com/go-modulus/graphql v0.0.0-20260306201452-a0d7aa3b5cfe
@@ -21,6 +20,7 @@ require (
 )
 
 require (
+	braces.dev/errtrace v0.4.0 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	github.com/agnivade/levenshtein v1.2.1 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
@@ -35,6 +35,7 @@ require (
 	github.com/go-chi/chi/v5 v5.2.5 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/go-modulus/pgx v0.1.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect

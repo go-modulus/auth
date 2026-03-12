@@ -1,9 +1,9 @@
 package action
 
 import (
-	"braces.dev/errtrace"
 	"context"
 	"github.com/go-modulus/auth"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/go-modulus/modulus/validator"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"

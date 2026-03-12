@@ -1,12 +1,12 @@
 package graphql
 
 import (
-	"braces.dev/errtrace"
 	"context"
 	"github.com/go-modulus/auth"
 	"github.com/go-modulus/auth/graphql"
 	graphql2 "github.com/go-modulus/auth/install/graphql"
 	"github.com/go-modulus/auth/providers/google/action"
+	"github.com/go-modulus/modulus/errors/errtrace"
 )
 
 type Resolver struct {

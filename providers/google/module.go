@@ -4,8 +4,8 @@ import (
 	"github.com/go-modulus/auth"
 	"github.com/go-modulus/auth/providers/google/action"
 	"github.com/go-modulus/auth/providers/google/graphql"
-	"github.com/go-modulus/modulus/db/pgx"
 	"github.com/go-modulus/modulus/module"
+	"github.com/go-modulus/pgx"
 )
 
 func NewModule() *module.Module {

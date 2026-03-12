@@ -1,7 +1,6 @@
 package action
 
 import (
-	"braces.dev/errtrace"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -9,6 +8,7 @@ import (
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/modulus/errors"
 	"github.com/go-modulus/modulus/errors/errsys"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/gofrs/uuid"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"

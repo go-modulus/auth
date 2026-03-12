@@ -1,13 +1,14 @@
 package auth
 
 import (
-	"braces.dev/errtrace"
 	"errors"
+	"net/http"
+	"regexp"
+
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/go-modulus/modulus/http/errhttp"
 	"github.com/go-modulus/modulus/logger"
 	"github.com/gofrs/uuid"
-	"net/http"
-	"regexp"
 )
 
 var authRegexp = regexp.MustCompile(`(Bearer[ ]+)([^,\n$ ]+)`)

@@ -8,7 +8,7 @@ This is a prompt with actions to implement after the module installation.
 package action
 
 import (
-	"braces.dev/errtrace"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"context"
 	"errors"
 	"github.com/go-modulus/modulus/errors/errsys"

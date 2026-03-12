@@ -1,10 +1,11 @@
 package auth
 
 import (
-	"braces.dev/errtrace"
 	"context"
+
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/modulus/errors"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/gofrs/uuid"
 	"golang.org/x/crypto/bcrypt"
 )

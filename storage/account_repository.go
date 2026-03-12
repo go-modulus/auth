@@ -1,11 +1,11 @@
 package storage
 
 import (
-	"braces.dev/errtrace"
 	"context"
 	"encoding/json"
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/modulus/errors"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/gofrs/uuid"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"

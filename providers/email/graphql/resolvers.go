@@ -6,9 +6,9 @@ import (
 	"github.com/go-modulus/auth/repository"
 	captchaAction "github.com/go-modulus/modulus/captcha/action"
 
-	"braces.dev/errtrace"
 	"github.com/go-modulus/auth"
 	mErrors "github.com/go-modulus/modulus/errors"
+	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/go-modulus/modulus/errors/erruser"
 
 	"github.com/go-modulus/auth/providers/email/action"
