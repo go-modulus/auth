@@ -9,7 +9,7 @@ import (
 )
 
 func NewModule() *module.Module {
-	return module.NewModule("auth google provider").
+	return module.NewModule("modulus/auth/google").
 		// Add all dependencies of a module here
 		AddDependencies(
 			pgx.NewModule(),

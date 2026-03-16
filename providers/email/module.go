@@ -18,7 +18,7 @@ type AuthEmailProviderModule struct {
 
 func NewModule() *AuthEmailProviderModule {
 	return &AuthEmailProviderModule{
-		module.NewModule("auth email provider").
+		module.NewModule("modulus/auth/email").
 			// Add all dependencies of a module here
 			AddDependencies(
 				auth.NewModule(),
