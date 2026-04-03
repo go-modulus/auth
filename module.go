@@ -130,27 +130,27 @@ func NewManifesto() module.Manifesto {
 	)
 	graphqlModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/storage/migration/20240214134322_auth.sql",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/storage/migration/20240214134322_auth.sql",
 			DestFile:  "internal/auth/storage/migration/20240214134322_auth.sql",
 		},
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/storage/migration/20240320084613_auth_account.sql",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/storage/migration/20240320084613_auth_account.sql",
 			DestFile:  "internal/auth/storage/migration/20240320084613_auth_account.sql",
 		},
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/storage/migration/20250508110252_add_reset_password_request_table.sql",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/storage/migration/20250508110252_add_reset_password_request_table.sql",
 			DestFile:  "internal/auth/storage/migration/20250508110252_add_reset_password_request_table.sql",
 		},
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/install/module.go.tmpl",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/install/module.go.tmpl",
 			DestFile:  "internal/auth/module.go",
 		},
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/install/graphql/auth.graphql",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/install/graphql/auth.graphql",
 			DestFile:  "internal/auth/graphql/auth.graphql",
 		},
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/install/graphql/directive.go",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/install/graphql/directive.go",
 			DestFile:  "internal/auth/graphql/directive.go",
 		},
 	).AppendPostInstallCommands(

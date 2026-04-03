@@ -52,13 +52,13 @@ func NewManifesto() module.Manifesto {
 	)
 	emailModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/providers/email/graphql/auth.graphql",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/email/graphql/auth.graphql",
 			DestFile:  "internal/auth/providers/email/graphql/auth.graphql",
 		},
 	)
 	emailModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/providers/email/prompt.md",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/email/prompt.md",
 			DestFile:  "internal/auth/providers/email/prompt.md",
 		},
 	)

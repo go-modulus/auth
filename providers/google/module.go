@@ -41,13 +41,13 @@ func NewManifesto() module.Manifesto {
 	)
 	googleModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/providers/google/graphql/auth.graphql",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/google/graphql/auth.graphql",
 			DestFile:  "internal/auth/providers/google/graphql/auth.graphql",
 		},
 	)
 	googleModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/providers/google/prompt.md",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/google/prompt.md",
 			DestFile:  "internal/auth/providers/google/prompt.md",
 		},
 	)
@@ -55,20 +55,20 @@ func NewManifesto() module.Manifesto {
 	// docs
 	googleModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/providers/google/README.md",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/google/README.md",
 			DestFile:  "internal/auth/providers/google/README.md",
 		},
 	)
 	googleModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/providers/google/img/name_of_google_client.png",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/google/img/name_of_google_client.png",
 			DestFile:  "internal/auth/providers/google/img/name_of_google_client.png",
 		},
 	)
 
 	googleModule.Install.AppendFiles(
 		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/modulus/refs/heads/main/auth/providers/google/img/register_new_project.png",
+			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/google/img/register_new_project.png",
 			DestFile:  "internal/auth/providers/google/img/register_new_project.png",
 		},
 	)
