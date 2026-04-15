@@ -3,9 +3,10 @@ package action_test
 import (
 	"context"
 	"encoding/json"
-	"github.com/go-modulus/auth/install/graphql"
 	"strings"
 	"testing"
+
+	"github.com/go-modulus/auth/install/graphql"
 
 	"github.com/brianvoe/gofakeit/v7"
 	"github.com/go-modulus/auth/repository"
@@ -52,6 +53,68 @@ func TestRegisterUser_Execute(t *testing.T) {
 			require.NoError(t, err, "Pair should be created")
 
 			account := authFixture.Account().ID(pair.AccessToken.AccountID).PullUpdates(t).Cleanup(t).GetEntity()
+			identity := authFixture.Identity().ID(pair.AccessToken.IdentityID).PullUpdates(t).Cleanup(t).GetEntity()
+			accessToken := authFixture.AccessToken().Hash(pair.AccessToken.Hash).PullUpdates(t).Cleanup(t).GetEntity()
+			refreshToken := authFixture.RefreshToken().Hash(pair.RefreshToken.Hash).PullUpdates(t).Cleanup(t).GetEntity()
+
+			t.Log("Given the email is not registered as identity")
+			t.Log("When the email is registering")
+			t.Log("	Then the identity is registered successfully")
+			require.Nil(t, err)
+			require.NotEmpty(t, identity.ID)
+			require.Equal(t, request.Email, identity.Identity)
+
+			t.Log("   And account is created")
+			require.Equal(t, account.ID.String(), identity.AccountID.String())
+			require.Equal(t, storage.AccountStatusActive, account.Status)
+
+			t.Log("   And account has default role")
+			require.Len(t, account.Roles, 1)
+			require.Equal(t, graphql.DefaultUserRole, account.Roles[0])
+
+			t.Log("   And the tokens are created")
+			require.Equal(t, pair.AccessToken.AccountID.String(), identity.AccountID.String())
+			require.Equal(t, pair.AccessToken.SessionID.String(), accessToken.SessionID.String())
+			require.Equal(t, pair.RefreshToken.IdentityID.String(), identity.ID.String())
+			require.Equal(t, pair.RefreshToken.SessionID.String(), refreshToken.SessionID.String())
+
+		},
+	)
+
+	t.Run(
+		"Success with set ID", func(t *testing.T) {
+			ctx := context.Background()
+
+			creatorMock.Test(t)
+			t.Cleanup(
+				func() {
+					creatorMock.AssertExpectations(t)
+					creatorMock.ExpectedCalls = make([]*mock.Call, 0)
+					creatorMock.Calls = make([]mock.Call, 0)
+				},
+			)
+
+			parts := strings.Split(gofakeit.Email(), "@")
+			userID := uuid.Must(uuid.NewV4())
+			request := action.RegisterInput{
+				ID:       userID,
+				Email:    parts[0] + "@gmail.com",
+				Password: gofakeit.Password(true, true, true, true, false, 20),
+			}
+			creatorMock.On(
+				"CreateUser",
+				mock.Anything,
+				mock.MatchedBy(
+					func(u action.User) bool {
+						return u.Email == request.Email
+					},
+				),
+			).Return(action.User{}, nil)
+
+			pair, err := register.Execute(ctx, request)
+			require.NoError(t, err, "Pair should be created")
+
+			account := authFixture.Account().ID(userID).PullUpdates(t).Cleanup(t).GetEntity()
 			identity := authFixture.Identity().ID(pair.AccessToken.IdentityID).PullUpdates(t).Cleanup(t).GetEntity()
 			accessToken := authFixture.AccessToken().Hash(pair.AccessToken.Hash).PullUpdates(t).Cleanup(t).GetEntity()
 			refreshToken := authFixture.RefreshToken().Hash(pair.RefreshToken.Hash).PullUpdates(t).Cleanup(t).GetEntity()

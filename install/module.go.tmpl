@@ -2,9 +2,9 @@ package graphql
 
 import (
 	"embed"
+
 	"github.com/go-modulus/modulus/module"
-	"go.uber.org/fx"
-	"io/fs"
+	"github.com/go-modulus/pgx/migrator"
 )
 
 //go:embed storage/migration/*.sql
@@ -14,6 +14,6 @@ func NewModule() *module.Module {
 	return module.NewModule(
 		"auth",
 	).AddProviders(
-		fx.Annotate(func() fs.FS { return migrationFS }, fx.ResultTags(`group:"migrator.migration-fs"`)),
+		migrator.ProvideMigrationFS(migrationFS),
 	)
 }

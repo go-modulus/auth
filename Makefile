@@ -23,7 +23,7 @@ analyze: ## Run static analyzer
 
 .PHONY: db-sqlc-generate
 db-sqlc-generate: ## Generate sqlc files in all modules
-	sqlc -f auth/storage/sqlc.yaml generate
+	sqlc -f storage/sqlc.yaml generate
 
 .PHONY: db-migrate
 db-migrate: ## Run migrations in test database

@@ -2,9 +2,10 @@ package action
 
 import (
 	"context"
+	"log/slog"
+
 	"github.com/go-modulus/modulus/errors/erruser"
 	"github.com/gofrs/uuid"
-	"log/slog"
 )
 
 var ErrUserAlreadyExists = erruser.New(
@@ -38,9 +39,8 @@ func (c *DefaultUserCreator) CreateUser(ctx context.Context, user User) (User, e
 	c.logger.Warn(
 		`Override UserCreator with your own implementation.
 In the main package create auth module as:
-md := authEmail.OverrideUserCreator(authEmail.NewModule(), func(impl *UserCreatorImplementation) authEmailAction.UserCreator {
-return impl
-}`,
+md := authEmail.NewModule(authEmail.OverrideUserCreator[*YourImplementationStruct])
+`,
 	)
 
 	return user, nil

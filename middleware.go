@@ -6,6 +6,7 @@ import (
 	"regexp"
 
 	"github.com/go-modulus/modulus/errors/errtrace"
+	http2 "github.com/go-modulus/modulus/http"
 	"github.com/go-modulus/modulus/http/errhttp"
 	"github.com/go-modulus/modulus/logger"
 	"github.com/gofrs/uuid"
@@ -79,4 +80,18 @@ func (a *Middleware) parseAccessToken(token string) (string, error) {
 		return matches[2], nil
 	}
 	return "", ErrInvalidToken
+}
+
+type PipelineFactory struct {
+	authMiddleware *Middleware
+}
+
+func New() *http2.Pipeline {
+
+}
+
+func NewPipelineFactory(authMiddleware *Middleware) *PipelineFactory {
+	return &PipelineFactory{
+		authMiddleware: authMiddleware,
+	}
 }

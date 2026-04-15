@@ -3,12 +3,13 @@ package auth_test
 import (
 	"context"
 	"encoding/json"
+	"testing"
+
 	"github.com/go-modulus/auth"
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/auth/storage"
 	"github.com/gofrs/uuid"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestPasswordAuthenticator_Register(t *testing.T) {
@@ -16,8 +17,10 @@ func TestPasswordAuthenticator_Register(t *testing.T) {
 	t.Run(
 		"register identity without additional data", func(t *testing.T) {
 			t.Parallel()
+			accountID := uuid.Must(uuid.NewV6())
 			account, err := passwordAuth.Register(
 				context.Background(),
+				accountID,
 				"user",
 				"password",
 				repository.IdentityTypeNickname,
@@ -51,8 +54,10 @@ func TestPasswordAuthenticator_Register(t *testing.T) {
 	t.Run(
 		"register identity with additional data", func(t *testing.T) {
 			t.Parallel()
+			accountID := uuid.Must(uuid.NewV6())
 			account, err := passwordAuth.Register(
 				context.Background(),
+				accountID,
 				"user1",
 				"password",
 				repository.IdentityTypeNickname,
@@ -101,6 +106,7 @@ func TestPasswordAuthenticator_Register(t *testing.T) {
 				GetEntity()
 			_, err := passwordAuth.Register(
 				context.Background(),
+				account.ID,
 				identity.Identity,
 				"password",
 				repository.IdentityTypeNickname,
@@ -129,6 +135,7 @@ func TestPasswordAuthenticator_Register(t *testing.T) {
 
 			_, err := passwordAuth.Register(
 				context.Background(),
+				accountId,
 				identity.Identity,
 				"password",
 				repository.IdentityTypeNickname,
@@ -151,6 +158,7 @@ func TestPasswordAuthenticator_Authenticate(t *testing.T) {
 			identity := "user4"
 			account, err := passwordAuth.Register(
 				context.Background(),
+				uuid.Must(uuid.NewV6()),
 				identity,
 				"password",
 				repository.IdentityTypeNickname,

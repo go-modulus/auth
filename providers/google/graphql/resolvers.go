@@ -2,9 +2,9 @@ package graphql
 
 import (
 	"context"
+
 	"github.com/go-modulus/auth"
 	"github.com/go-modulus/auth/graphql"
-	graphql2 "github.com/go-modulus/auth/install/graphql"
 	"github.com/go-modulus/auth/providers/google/action"
 	"github.com/go-modulus/modulus/errors/errtrace"
 )
@@ -30,8 +30,8 @@ func (r *Resolver) RegisterViaGoogle(ctx context.Context, input RegisterViaGoogl
 			Code:        input.Code,
 			Verifier:    input.Verifier,
 			RedirectUrl: url,
-			Roles:       []string{graphql2.DefaultUserRole},
-			UserInfo:    nil,
+			Roles:       input.Roles,
+			UserInfo:    input.UserInfo,
 		},
 	)
 	if err != nil {

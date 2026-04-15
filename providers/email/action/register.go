@@ -3,8 +3,9 @@ package action
 import (
 	"context"
 	"fmt"
-	"github.com/go-modulus/auth/install/graphql"
 	"strings"
+
+	"github.com/go-modulus/auth/install/graphql"
 
 	"github.com/go-modulus/auth"
 	"github.com/go-modulus/auth/repository"
@@ -28,11 +29,13 @@ var ErrCannotLogin = erruser.New(
 )
 
 type RegisterInput struct {
-	Email                      string
-	Password                   string
-	UserInfo                   map[string]interface{}
-	SubscribeToMarketingEmails bool
-	Roles                      []string
+	// ID of created user
+	// It is used to create a new account. In a case of empty ID, it will be generated automatically.
+	ID       uuid.UUID
+	Email    string
+	Password string
+	UserInfo map[string]interface{}
+	Roles    []string
 }
 
 var passwordValidationRules = []validation.Rule{
@@ -47,7 +50,7 @@ func (i *RegisterInput) Validate(ctx context.Context) error {
 		validation.Field(
 			&i.Email,
 			validation.Required.Error("Email is required"),
-			is.Email.Error("Email is not valid"),
+			is.EmailFormat.Error("Email is not valid"),
 		),
 		validation.Field(
 			&i.Password,
@@ -90,9 +93,9 @@ func NewRegister(
 // It returns the registered user.
 //
 // Errors:
-// * ErrEmailAlreadyExists - if the user already exists.
-// * ErrUserAlreadyExists - if cannot log in automatically.
-// * ErrCannotLogin - if cannot log in automatically.
+// * ErrEmailAlreadyExists - the identity with such email already exists.
+// * ErrUserAlreadyExists - overridden user provider says that the user already exists.
+// * ErrCannotLogin - cannot log in automatically after registration.
 func (r *Register) Execute(ctx context.Context, input RegisterInput) (auth.TokenPair, error) {
 	err := input.Validate(context.Background())
 	if err != nil {
@@ -106,9 +109,17 @@ func (r *Register) Execute(ctx context.Context, input RegisterInput) (auth.Token
 		input.Roles = []string{graphql.DefaultUserRole}
 	}
 
+	if input.ID == uuid.Nil {
+		input.ID, err = uuid.NewV6()
+		if err != nil {
+			return auth.TokenPair{}, errtrace.Wrap(err)
+		}
+	}
+
 	// Register new account with the email as identity
 	account, err := r.passwordAuth.Register(
 		ctx,
+		input.ID,
 		identityStr,
 		input.Password,
 		repository.IdentityTypeEmail,

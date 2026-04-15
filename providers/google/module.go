@@ -45,12 +45,6 @@ func NewManifesto() module.Manifesto {
 			DestFile:  "internal/auth/providers/google/graphql/auth.graphql",
 		},
 	)
-	googleModule.Install.AppendFiles(
-		module.InstalledFile{
-			SourceUrl: "https://raw.githubusercontent.com/go-modulus/auth/refs/heads/main/providers/google/prompt.md",
-			DestFile:  "internal/auth/providers/google/prompt.md",
-		},
-	)
 
 	// docs
 	googleModule.Install.AppendFiles(

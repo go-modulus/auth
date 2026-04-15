@@ -2,12 +2,13 @@ package action
 
 import (
 	"context"
+	"strings"
+
 	"github.com/go-modulus/auth"
 	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/go-modulus/modulus/validator"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
-	"strings"
 )
 
 type LoginInput struct {
@@ -22,7 +23,7 @@ func (i *LoginInput) Validate(ctx context.Context) error {
 		validation.Field(
 			&i.Email,
 			validation.Required.Error("Email is required"),
-			is.Email.Error("Email is not valid"),
+			is.EmailFormat.Error("Email is not valid"),
 		),
 		validation.Field(
 			&i.Password,

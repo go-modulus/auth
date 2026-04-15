@@ -79,6 +79,7 @@ func (a *PasswordAuthenticator) Authenticate(ctx context.Context, identity, pass
 // * Any error from the CredentialRepository.Create method.
 func (a *PasswordAuthenticator) Register(
 	ctx context.Context,
+	accountID uuid.UUID,
 	identity,
 	password string,
 	identityType repository.IdentityType,
@@ -92,11 +93,6 @@ func (a *PasswordAuthenticator) Register(
 		}
 		return repository.Account{}, errtrace.Wrap(repository.ErrIdentityExists)
 	} else if !errors.Is(err, repository.ErrIdentityNotFound) {
-		return repository.Account{}, errtrace.Wrap(err)
-	}
-
-	accountID, err := uuid.NewV6()
-	if err != nil {
 		return repository.Account{}, errtrace.Wrap(err)
 	}
 

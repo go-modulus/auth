@@ -2,11 +2,11 @@ package graphql
 
 import (
 	"context"
+
+	"github.com/go-modulus/auth"
 	"github.com/go-modulus/auth/graphql"
 	"github.com/go-modulus/auth/repository"
 	captchaAction "github.com/go-modulus/modulus/captcha/action"
-
-	"github.com/go-modulus/auth"
 	mErrors "github.com/go-modulus/modulus/errors"
 	"github.com/go-modulus/modulus/errors/errtrace"
 	"github.com/go-modulus/modulus/errors/erruser"
@@ -40,7 +40,12 @@ func NewResolver(
 	}
 }
 
-func (r *Resolver) RegisterViaEmail(ctx context.Context, input RegisterViaEmailInput) (graphql.TokenPair, error) {
+// EmailSignUp registers a new user via email and password.
+// Errors:
+// * github.com/go-modulus/auth/providers/email/action.ErrEmailAlreadyExists - the identity with such email already exists.
+// * github.com/go-modulus/auth/providers/email/action.ErrUserAlreadyExists - overridden user provider says that the user already exists.
+// * github.com/go-modulus/auth/providers/email/action.ErrCannotLogin - cannot log in automatically after registration.
+func (r *Resolver) EmailSignUp(ctx context.Context, input EmailSignUpInput) (graphql.TokenPair, error) {
 	err := r.checkCaptcha.Execute(input.Captcha)
 	if err != nil {
 		return graphql.TokenPair{}, errtrace.Wrap(err)
@@ -48,10 +53,11 @@ func (r *Resolver) RegisterViaEmail(ctx context.Context, input RegisterViaEmailI
 
 	pair, err := r.register.Execute(
 		ctx, action.RegisterInput{
+			ID:       input.ID,
 			Email:    input.Email,
 			Password: input.Password,
 			UserInfo: input.UserInfo,
-			Roles:    nil,
+			Roles:    input.Roles,
 		},
 	)
 	if err != nil {
@@ -61,7 +67,7 @@ func (r *Resolver) RegisterViaEmail(ctx context.Context, input RegisterViaEmailI
 	return r.transformPair(pair), nil
 }
 
-func (r *Resolver) LoginViaEmail(ctx context.Context, input LoginViaEmailInput) (graphql.TokenPair, error) {
+func (r *Resolver) EmailSignIn(ctx context.Context, input EmailSignInInput) (graphql.TokenPair, error) {
 	err := r.checkCaptcha.Execute(input.Captcha)
 	if err != nil {
 		return graphql.TokenPair{}, errtrace.Wrap(err)
