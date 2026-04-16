@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -122,6 +123,14 @@ type refreshTokenResponseWriter struct {
 	ctx     context.Context
 	written bool
 	config  RefreshTokenConfig
+}
+
+func (rw *refreshTokenResponseWriter) Flush() {
+	if f, ok := rw.ResponseWriter.(http.Flusher); ok {
+		f.Flush()
+	} else {
+		panic(fmt.Errorf("ResponseWriter does not implement http.Flusher"))
+	}
 }
 
 func (rw *refreshTokenResponseWriter) Write(b []byte) (int, error) {
