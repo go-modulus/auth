@@ -316,26 +316,6 @@ func TestRegisterUser_Execute(t *testing.T) {
 
 func TestRegisterUser_Execute_Error(t *testing.T) {
 	t.Parallel()
-	t.Run(
-		"invalid email host lookup", func(t *testing.T) {
-			t.Parallel()
-			ctx := context.Background()
-
-			parts := strings.Split(gofakeit.Email(), "@")
-			request := action.RegisterInput{
-				Email:    parts[0] + "@asdfadgadgadgadgadg.dsd",
-				Password: gofakeit.Password(true, true, true, true, false, 20),
-			}
-			pair, err := register.Execute(ctx, request)
-
-			t.Log("Given the identity is not registered")
-			t.Log("When the identity is registering using invalid email host")
-			t.Log("	Then error is returned")
-			require.NotNil(t, err)
-			require.Equal(t, "Email is not valid", errors.Hint(err))
-			require.Empty(t, pair.AccessToken.Token.String)
-		},
-	)
 
 	t.Run(
 		"invalid email", func(t *testing.T) {

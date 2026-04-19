@@ -24,7 +24,7 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	test.LoadEnv(".")
+	test.LoadEnv()
 	mod := auth.NewModule().
 		AddProviders(
 			func(db *pgxpool.Pool) storage.DBTX {

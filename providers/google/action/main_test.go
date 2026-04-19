@@ -33,7 +33,7 @@ func createModule() *module.Module {
 }
 
 func TestMain(m *testing.M) {
-	test.LoadEnv("../../..")
+	test.LoadEnv()
 
 	mod := createModule()
 	mod.AddProviders(
