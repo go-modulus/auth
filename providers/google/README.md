@@ -102,8 +102,6 @@ async function getAccessToken(code) {
 
 12. Use access token to gain access to the guarded queries and mutation.
 
-Examples of the token exchange you can find in the [DEMO](https://backend.dev.i10x.ai/auth/google).
-
 **Query:**
 
 ```graphql
