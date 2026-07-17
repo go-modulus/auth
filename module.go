@@ -155,7 +155,7 @@ func NewManifesto() module.Manifesto {
 		},
 	).AppendPostInstallCommands(
 		module.PostInstallCommand{
-			CmdPackage: "github.com/go-modulus/mtools/cmd/mtools@latest",
+			CmdPackage: "github.com/go-modulus/mtools@latest",
 			Params:     []string{"db", "migrate"},
 		},
 	)
