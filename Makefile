@@ -27,10 +27,10 @@ db-sqlc-generate: ## Generate sqlc files in all modules
 
 .PHONY: db-migrate
 db-migrate: ## Run migrations in test database
-	$(MAKE) install
-	APP_ENV=test ./bin/mtools db migrate --local-manifest=modules-test.json
+	go install github.com/go-modulus/mtools@latest
+	APP_ENV=test mtools db migrate --local-manifest=modules-test.json
 
-.PHONY: db-migrate
+.PHONY: db-rollback
 db-rollback: ## Rollback the last migration in test database
-	$(MAKE) install
-	APP_ENV=test ./bin/mtools db rollback --local-manifest=modules-test.json
+	go install github.com/go-modulus/mtools@latest
+	APP_ENV=test mtools db rollback --local-manifest=modules-test.json

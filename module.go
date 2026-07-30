@@ -7,7 +7,6 @@ import (
 	"github.com/go-modulus/auth/locales"
 	"github.com/go-modulus/auth/repository"
 	"github.com/go-modulus/auth/storage"
-	"github.com/go-modulus/graphql"
 	"github.com/go-modulus/modulus/logger"
 	"github.com/go-modulus/modulus/module"
 	"github.com/go-modulus/pgx"
@@ -28,7 +27,6 @@ func NewModule(options ...module.Option) *module.Module {
 	return module.NewModule("modulus/auth").
 		AddDependencies(
 			pgx.NewModule(),
-			graphql.NewModule(),
 			logger.NewModule(),
 		).
 		AddProviders(
