@@ -43,7 +43,7 @@ func (a *Middleware) Middleware(next http.Handler) errhttp.Handler {
 
 		authorization := r.Header.Get("Authorization")
 		if authorization != "" {
-			token, err := a.parseAccessToken(authorization)
+			token, err := parseAccessToken(authorization)
 			if err != nil {
 				return err
 			}
@@ -74,7 +74,11 @@ func (a *Middleware) HTTPMiddleware() mHttp.Middleware {
 	return errhttp.WrapMiddleware(a.errorPipeline, a.Middleware)
 }
 
-func (a *Middleware) parseAccessToken(token string) (string, error) {
+// parseAccessToken extracts the bearer token from an "Authorization" value,
+// e.g. "Bearer abc123" -> "abc123". Shared by Middleware (HTTP requests) and
+// GraphQLInitFuncFactory (WebSocket subscription connections) so both
+// authenticate access tokens the exact same way.
+func parseAccessToken(token string) (string, error) {
 	matches := authRegexp.FindStringSubmatch(token)
 	if len(matches) > 2 {
 		return matches[2], nil

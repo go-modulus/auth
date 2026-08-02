@@ -32,6 +32,7 @@ func NewModule(options ...module.Option) *module.Module {
 		AddProviders(
 			NewMiddlewareConfig,
 			NewMiddleware,
+			NewGraphQLInitFuncFactory,
 			NewPasswordAuthenticator,
 			NewPlainTokenAuthenticator,
 			locales.ProvideLocalesFs(),
